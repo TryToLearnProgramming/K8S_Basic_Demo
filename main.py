@@ -1,13 +1,18 @@
-#!C:\Python310\python.py
+#!/usr/bin/env python
+
+import cgi
+import csv
+import pandas as pd
+
 print("Content-Type:text/html")
 print()
-import cgi
+
 cgi.enable()
-import csv
+
 form = cgi.FieldStorage()
 input1 = form.getvalue('input1')
 input2 = form.getvalue('input2')
-import pandas as pd
+
 df=pd.read_csv("user.csv",index_col=False)
 for i in range (0,100) :
     if df.iloc[i,0]==input1 :
