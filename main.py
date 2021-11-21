@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import cgi
 import csv
@@ -7,7 +7,7 @@ import pandas as pd
 print("Content-Type:text/html")
 print()
 
-cgi.enable()
+#cgi.enable()
 
 form = cgi.FieldStorage()
 input1 = form.getvalue('input1')
