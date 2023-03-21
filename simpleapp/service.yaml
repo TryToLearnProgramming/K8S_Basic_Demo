@@ -1,7 +1,8 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: ng-service 
+  name: ng-service
+  namespace: ngx 
 spec:
   type: NodePort 
   selector:
@@ -10,4 +11,4 @@ spec:
     - name: http
       port: 80 # Service Port
       targetPort: 80 # Container Port
-      nodePort: 31878 # NodePort
+      nodePort: 31879 # NodePort
