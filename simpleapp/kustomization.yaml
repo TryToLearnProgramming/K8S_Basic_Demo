@@ -5,4 +5,4 @@ resources:
 
 images:
 - name: sami203/simpleapp
-  newTag: e9804356dba05a9ce0369441bbaf07f259f581f0
+  newTag: 3e550b2148751e2f5726f8906ae6a7d8c7effd5b
