@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: ng-web:latest
+        image: sami203/simpleapp
         resources:
           limits:
             memory: "128Mi"
