@@ -1,9 +1,10 @@
 version: "3"
+name: simpleapp
 services:
-  app:
-    container_name: web-ng
+  web:
     build:
       context: .
       dockerfile: ./Dockerfile
+    container_name: web-ng
     ports:
       - "80:80"
