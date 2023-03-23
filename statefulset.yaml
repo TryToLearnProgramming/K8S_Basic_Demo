@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: darwin
+spec:
+  selector:
+    matchLabels:
+      app: darwin-app # this is the identifier for the pods
+  serviceName: "darwin-set" # this is Headless service: The network domain controller that allows clients to connect with the pods using a DNS entry.
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: darwin # label for pods, using this the statefulset identify the pods pods (line no. 8)
+    spec:
+      containers:
+      - name: darwin-app
+        image: novice
+        ports:
+        - containerPort: 80 # as there is a headless service so need to specify the containers port
+          name: web
+        volumeMounts: # mounted persistent volumes name and path
+        - name: www
+          mountPath: /var/log
+      volumes: # this is the persistent Volume, shard with pods. there is a separate manifest for this
+      - name: darwin-volume
+        persistentVolumeClaim:
+          claimName: darwin-claim

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: darwin-claim
+spec:
+  accessModes: # access type
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 100Mi
