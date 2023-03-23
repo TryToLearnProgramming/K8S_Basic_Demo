@@ -33,10 +33,14 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/simpleapp:${{ github.sha }}
+
+      - name: The current paths
+        run:
+          echo $PWD
       
       - name: update kustomization
         run:  |
-          sed -Ei "/\-\ name\:\ $REGISTRY\/simpleapp$/{n;s/\w+$/${{ github.sha }}/}" ./simpleapp/kustomization.yaml
+          sed -Ei "/\-\ name\:\ $REGISTRY\/simpleapp$/{n;s/\w+$/${{ github.sha }}/}" simpleapp/kustomization.yaml
 
       - name: Deploy latest
         run: |
