@@ -48,5 +48,5 @@ jobs:
           git config --global user.name "gitops"
           git add .
           git commit -m "Deploying latest image"
-          parallel --retries 10 --delay 3 ::: "git pull --rebase && git push origin test_argo"
-        if: steps.image_build.outcome == 'success'
+          git push
+       
