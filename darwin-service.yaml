@@ -4,7 +4,7 @@ kind: Service
 metadata:
   name: darwin
   labels:
-    app: darwin #should match .spec.metadata.app in the statefulset template (line no. 14 in statefulset.yaml)
+    app: darwin-app #should match .spec.metadata.app in the statefulset template (line no. 14 in statefulset.yaml)
 spec:
   ports:
   - port: 80

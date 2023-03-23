@@ -1,3 +1,4 @@
+# in this manifest there is some issue need to fix 23.03.2023
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -11,7 +12,7 @@ spec:
   template:
     metadata:
       labels:
-        app: darwin # label for pods, using this the statefulset identify the pods pods (line no. 8)
+        app: darwin-app # label for pods, using this the statefulset identify the pods pods (line no. 8)
     spec:
       containers:
       - name: darwin-app
