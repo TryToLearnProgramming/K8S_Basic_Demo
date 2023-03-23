@@ -37,3 +37,11 @@ jobs:
       - name: update kustomization
         run:  |
           sed -Ei "/\-\ name\:\ $REGISTRY\/simpleapp$/{n;s/\w+$/${{ github.sha }}/}" ./simpleapp/kustomization.yaml
+      - name: Deploy latest
+        run: |
+          git config --global user.email "your@mail.com"
+          git config --global user.name "user_name"
+          git add simpleapp/kustomization.yaml
+          git commit -m "Deploying latest image"
+          parallel --retries 10 --delay 3 ::: "git pull --rebase && git push origin test_argo"
+        if: steps.image_build.outcome == 'success'
