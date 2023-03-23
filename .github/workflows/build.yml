@@ -40,7 +40,7 @@ jobs:
       
       - name: update kustomization
         run:  |
-          sed -Ei "/\-\ name\:\ $REGISTRY\/simpleapp$/{n;s/\w+$/${{ github.sha }}/}" simpleapp/kustomization.yaml
+          sed -Ei "/\-\ name\:\ ${{ secrets.DOCKER_USERNAME }}\/simpleapp$/{n;s/\w+$/${{ github.sha }}/}" /simpleapp/kustomization.yaml
 
       - name: Deploy latest
         run: |
