@@ -41,9 +41,6 @@ jobs:
       - name: update kustomization
         run:  |
           sed -Ei "/\-\ name\:\ $REGISTRY\/simpleapp$/{n;s/\w+$/${{ github.sha }}/}" simpleapp/kustomization.yaml
-
-      - name: Deploy latest
-        run: |
           git config --global user.email "samivivake@gmail.com"
           git config --global user.name "gitops"
           git add .
