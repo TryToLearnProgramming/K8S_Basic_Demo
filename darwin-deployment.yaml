@@ -21,7 +21,7 @@ spec:
         - name: web-app
           image: novice # container image
           volumeMounts: # name and mounted path of the volume
-          - name: counter
+          - name: darwin-volume # shoud be same with volumes name (line no. 27)
             mountPath: /app/
       volumes: # this is a persistent volume attach and shared by this pods, their is a separate manifest file
        - name: darwin-volume
