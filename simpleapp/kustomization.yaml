@@ -2,3 +2,7 @@ resources:
 - deploy.yaml
 - service.yaml
 - ingrace.yaml
+
+images:
+- name: sami203/simpleapp
+  newTag: 12345

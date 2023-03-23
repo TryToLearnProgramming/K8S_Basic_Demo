@@ -1,0 +1,36 @@
+name: Build and Push to Docker-Hub
+
+on:
+  push:
+    branches:
+      - test_argo
+    paths:
+      - .github/**
+      - simpleapp/**
+
+jobs:
+  build:
+    name: Build Docker Image and Push into Docker-Hub
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v3
+      
+      - name: Login to docker hub
+        uses: actions/docker/login@master
+        with: # Set the secret as an input
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        # env: # Set the secret as an input
+        #   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        #   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: docker build
+        env:
+          IMAGE_TAG: ${{ github.sha }}
+        run: docker build -t sami203/simpleapp:$IMAGE_TAG -f simpleapp/Dockerfile .
+      - name: push
+        run:  |
+          docker push sami203/simpleapp:$IMAGE_TAG
+          sed -Ei "/\-\ name\:\ sami203\/simpleapp$/{n;s/\w+$/$IMAGE_TAG/}" ./simpleapp/kustomization.yaml
