@@ -1,8 +1,0 @@
-resources:
-- deploy.yaml
-- service.yaml
-- ingrace.yaml
-
-images:
-- name: sami203/simpleapp
-  newTag: 3e550b2148751e2f5726f8906ae6a7d8c7effd5b

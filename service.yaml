@@ -1,0 +1,16 @@
+# To execute the Deployment within the cluster, 
+# it should be exposed using a service, 
+# such as the NodePort service
+# it can be a ClusterIP too
+apiVersion: v1
+kind: Service
+metadata:
+  name: darwin-service
+spec:
+  ports:
+    - name: http
+      port: 80
+      nodePort: 30080
+  selector:
+    name: darwin-app
+  type: NodePort
