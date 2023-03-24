@@ -5,12 +5,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: darwin-service
+  name: mysql-service
 spec:
   ports:
     - name: http
       port: 80
+      targetPort: 3306
       nodePort: 30080
   selector:
-    name: darwin-app
+    name: mysql-app
   type: NodePort
