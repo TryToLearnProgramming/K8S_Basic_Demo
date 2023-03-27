@@ -30,10 +30,7 @@ spec:
         volumeMounts: # mounted persistent volumes name and path
         - name: mysql-data
           mountPath: /var/lib/mysql
-      volumes: # this is the persistent Volume, shard with pods. there is a separate manifest for this
-      - name: mysql-volume
-        persistentVolumeClaim:
-          claimName: mysql-claim
+# # template for Persistent Volume
   volumeClaimTemplates:
     - metadata:
         name: mysql-data

@@ -6,9 +6,10 @@ metadata:
   labels:
     app: mysql-app #should match .spec.metadata.app in the statefulset template (line no. 14 in statefulset.yaml)
 spec:
+  type: ClusterIP
   ports:
   - port: 3306
     name: mysql #should match .spec.container.containerPort.name in the statefulset template (line no. 21 in statefulset.yaml)
-  clusterIP: None # the traffic routes through k8s cluster IP
+  # clusterIP: None # the traffic routes through k8s cluster IP
   selector:
-    app: mysql 
+    app: mysql-app
