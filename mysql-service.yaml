@@ -1,0 +1,14 @@
+# To expose the StatefulSet via a headless service need to configure a service
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  labels:
+    app: mysql-app #should match .spec.metadata.app in the statefulset template (line no. 14 in statefulset.yaml)
+spec:
+  ports:
+  - port: 3306
+    name: mysql #should match .spec.container.containerPort.name in the statefulset template (line no. 21 in statefulset.yaml)
+  clusterIP: None # the traffic routes through k8s cluster IP
+  selector:
+    app: mysql 

@@ -2,28 +2,45 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: darwin
+  name: mysql-statefulset
 spec:
   selector:
     matchLabels:
-      app: darwin-app # this is the identifier for the pods
-  serviceName: "darwin-set" # this is Headless service: The network domain controller that allows clients to connect with the pods using a DNS entry.
-  replicas: 3
+      app: mysql-app # this is the identifier for the pods
+  serviceName: "mysql" # this is Headless service: The network domain controller that allows clients to connect with the pods using a DNS entry.
+  replicas: 1
   template:
     metadata:
       labels:
-        app: darwin-app # label for pods, using this the statefulset identify the pods pods (line no. 8)
+        app: mysql-app # label for pods, using this the statefulset identify the pods pods (line no. 8)
     spec:
+      terminationGracePeriodSeconds: 10
       containers:
-      - name: darwin-app
-        image: novice
+      - name: mysql-app
+        image: mysql:latest
         ports:
-        - containerPort: 80 # as there is a headless service so need to specify the containers port
-          name: web
+        - containerPort: 3306 # as there is a headless service so need to specify the containers port
+          name: mysql
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysql-secrets
+                key: ROOT_PASSWORD
         volumeMounts: # mounted persistent volumes name and path
-        - name: www
-          mountPath: /var/log
+        - name: mysql-data
+          mountPath: /var/lib/mysql
       volumes: # this is the persistent Volume, shard with pods. there is a separate manifest for this
-      - name: darwin-volume
+      - name: mysql-volume
         persistentVolumeClaim:
-          claimName: darwin-claim
+          claimName: mysql-claim
+  volumeClaimTemplates:
+    - metadata:
+        name: mysql-data
+      spec:
+        storageClassName: standard
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 100Mi

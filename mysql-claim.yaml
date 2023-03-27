@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: darwin-claim
+  name: mysql-claim
 spec:
   accessModes: # access type
     - ReadWriteMany
