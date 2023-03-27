@@ -1,7 +1,7 @@
-# To execute the Deployment within the cluster, 
-# it should be exposed using a service, 
-# such as the NodePort service
-# it can be a ClusterIP too
+# # To execute the Deployment within the cluster, 
+# # it should be exposed using a service, 
+# # such as the NodePort service
+# # it can be a ClusterIP too
 apiVersion: v1
 kind: Service
 metadata:
@@ -9,9 +9,27 @@ metadata:
 spec:
   ports:
     - name: http
-      port: 80
+      port: 3306
       targetPort: 3306
       nodePort: 30080
   selector:
-    name: mysql-app
+    app: mysql-app
   type: NodePort
+
+# # Service Type is ClusterIP
+# # only can use inside from the pod.
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: mysql-app-svc
+#   labels:
+#     app: mysql-app-svc
+# spec:
+#   type: ClusterIP
+#   ports:
+#   - name: http-mysql
+#     port: 3306
+#     protocol: TCP
+#     targetPort: 3306
+#   selector:
+#     app: mysql-app
