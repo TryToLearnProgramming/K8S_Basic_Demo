@@ -8,7 +8,7 @@ spec:
     matchLabels:
       app: mysql-app # this is the identifier for the pods
   serviceName: "mysql" # this is Headless service: The network domain controller that allows clients to connect with the pods using a DNS entry.
-  replicas: 1
+  replicas: 3
   template:
     metadata:
       labels:
